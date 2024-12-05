@@ -7,8 +7,6 @@
     :root {
       --primary: #8b5cf6;
       --text: #1f2937;
-      --gradient1: #7c3aed;
-      --gradient2: #a78bfa;
     }
     body {
       font-family: system-ui, -apple-system, sans-serif;
@@ -20,46 +18,9 @@
       min-height: 100vh;
       margin: 0;
       padding: 0;
-      position: relative;
-      overflow-y: auto;
-      -webkit-tap-highlight-color: transparent;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      z-index: -1;
-      background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(139,92,246,0) 70%);
-      animation: rotate 30s linear infinite;
-    }
-    .main-container {
       display: flex;
-      min-height: 100vh;
-      padding: clamp(0.5rem, 5vw, 2rem);
+      justify-content: center;
       align-items: center;
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow-y: auto;
-    }
-    .content-wrapper {
-      width: 100%;
-      max-width: min(90vw, 700px);
-      margin: 0 auto;
-      padding: clamp(1.5rem, 3vw, 3rem);
-      animation: fadeIn 1s ease;
-      position: relative;
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.5s ease;
-    }
-    .content-wrapper.active {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: all;
     }
     .interaction-prompt {
       position: fixed;
@@ -74,190 +35,15 @@
       font-weight: 500;
       text-align: center;
       z-index: 1000;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-    .interaction-prompt.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .title {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 40%, #8b5cf6 80%, #a78bfa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: clamp(1rem, 3vw, 1.75rem);
-      text-align: center;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      animation: titleGlow 3s ease-in-out infinite;
-    }
-    .subtitle {
-      font-size: clamp(1.1rem, 3vw, 1.6rem);
-      color: #4b5563;
-      margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
-      text-align: center;
-      font-weight: 300;
-      padding: 0 clamp(0.5rem, 2vw, 1rem);
-    }
-    .captcha-box {
-      background: rgba(255,255,255,0.95);
-      border-radius: clamp(20px, 4vw, 28px);
-      padding: clamp(1.5rem, 4vw, 3rem);
-      margin: clamp(1.5rem, 4vw, 2.5rem) 0;
-      box-shadow: 0 15px 35px rgba(139,92,246,0.15);
-      border: 1px solid rgba(255,255,255,0.8);
-      position: relative;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(5px);
-    }
-    .captcha-box:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 20px 40px rgba(139,92,246,0.2);
-    }
-    .bubble-tip {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      background: linear-gradient(135deg,#fff,#f3e8ff);
-      padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 24px);
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(139,92,246,0.15);
-      font-size: clamp(0.85rem, 2vw, 0.95rem);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      animation: float 3s ease-in-out infinite;
-      opacity: 0;
-      visibility: hidden;
-    }
-    .bubble-tip.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    .bubble-tip:hover {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 10px 25px rgba(139,92,246,0.2);
-    }
-    .info-box {
-      background: rgba(255,255,255,0.9);
-      border-radius: clamp(16px, 3vw, 20px);
-      padding: clamp(1.5rem, 4vw, 2.5rem);
-      margin: clamp(1.5rem, 3vw, 2rem) 0;
-      box-shadow: 0 10px 30px rgba(139,92,246,0.1);
-      border: 1px solid rgba(255,255,255,0.8);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-    .info-box:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 35px rgba(139,92,246,0.15);
-    }
-    .highlight {
-      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-      font-weight: 600;
-      color: var(--primary);
-      margin: 1rem 0;
-      display: inline-block;
-      position: relative;
-    }
-    .highlight::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg,var(--gradient1),var(--gradient2));
-      opacity: 0.6;
-      animation: shimmer 2s infinite;
-    }
-    .footer {
-      text-align: center;
-      padding-top: clamp(1.5rem, 3vw, 2rem);
-      margin-top: clamp(2rem, 4vw, 3rem);
-      border-top: 2px solid rgba(139,92,246,0.2);
-    }
-    .footer-list {
-      display: flex;
-      gap: clamp(1rem, 2vw, 2rem);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .footer-list span {
-      padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
-      background: rgba(255,255,255,0.9);
-      border-radius: 12px;
-      font-size: clamp(0.85rem, 2vw, 0.95rem);
-      border: 1px solid rgba(255,255,255,0.8);
-      box-shadow: 0 4px 12px rgba(139,92,246,0.1);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-    .footer-list span:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 15px rgba(139,92,246,0.15);
-    }
-    .copyright {
-      font-size: 0.8rem;
-      text-align: right;
-      margin-top: 1rem;
-    }
-    .copyright a {
-      color: var(--text);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .copyright a:hover {
-      color: var(--primary);
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    @keyframes fadeIn {
-      from { opacity:0; transform:translateY(20px) }
-      to { opacity:1; transform:translateY(0) }
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-    @keyframes titleGlow {
-      0% { text-shadow: 0 0 10px rgba(139,92,246,0.5); }
-      50% { text-shadow: 0 0 20px rgba(139,92,246,0.8); }
-      100% { text-shadow: 0 0 10px rgba(139,92,246,0.5); }
-    }
-    @media (max-width: 480px) {
-      .footer-list {
-        flex-direction: column;
-        gap: 0.8rem;
-      }
-      .bubble-tip {
-        position: static;
-        margin-top: 1rem;
-        text-align: center;
-      }
-    }
   </style>
   <script>
     window.onload = function() {
-      document.getElementById("domainName").textContent = window.location.hostname;
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble-tip';
-      bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
-      document.querySelector('.captcha-box').appendChild(bubble);
-
-      const contentWrapper = document.querySelector('.content-wrapper');
       const prompt = document.createElement('div');
       prompt.className = 'interaction-prompt';
       
@@ -268,58 +54,19 @@
       }
       document.body.appendChild(prompt);
 
-      let interactionDetected = false;
-
-      function showContent() {
-        if (!interactionDetected) {
-          interactionDetected = true;
-          contentWrapper.classList.add('active');
-          prompt.classList.add('hidden');
-          setTimeout(() => {
-            prompt.remove();
-            bubble.classList.add('show');
-          }, 500);
-          
-          // Remove all event listeners
-          document.removeEventListener('mousemove', showContent);
-          document.removeEventListener('touchmove', showContent);
-          document.removeEventListener('scroll', showContent);
-        }
+      function loadMainPage() {
+        window.location.href = 'main.html';
       }
 
       if ('ontouchstart' in window) {
-        document.addEventListener('touchmove', showContent, {once: true, passive: true});
-        document.addEventListener('scroll', showContent, {once: true, passive: true});
+        document.addEventListener('touchmove', loadMainPage, {once: true, passive: true});
+        document.addEventListener('scroll', loadMainPage, {once: true, passive: true});
       } else {
-        document.addEventListener('mousemove', showContent, {once: true});
+        document.addEventListener('mousemove', loadMainPage, {once: true});
       }
     };
   </script>
 </head>
 <body>
-  <div class="main-container">
-    <div class="content-wrapper">
-      <h1 class="title">Security Verification</h1>
-      <div class="subtitle">
-        <p>Please complete the verification to continue to <span id="domainName"></span></p>
-      </div>
-      <div class="captcha-box">
-        ::CAPTCHA_BOX::
-      </div>
-      <div class="info-box">
-        <p class="highlight">Why is verification needed?</p>
-        <p>To ensure website security and provide the best browsing experience, we need to verify your access request. This process only takes a few seconds.</p>
-      </div>
-      <footer class="footer">
-        <div class="footer-list">
-          <span>Event ID: ::RAY_ID::</span>
-          <span>Your IP: ::CLIENT_IP::</span>
-        </div>
-        <div class="copyright">
-          <a href="https://t.me/EchoAether" target="_blank">© 2024 By aether</a>
-        </div>
-      </footer>
-    </div>
-  </div>
 </body>
 </html>
