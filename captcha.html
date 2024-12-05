@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>安全质询 | Cloud Service</title>
+  <title>Security Challenge | layer7.wiki</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
@@ -10,7 +10,7 @@
       --gradient1: #6366f1;
       --gradient2: #a5b4fc;
     }
-    /* 添加深色模式变量 */
+    /* Add dark mode variables */
     :root[data-theme="dark"] {
       --primary: #a5b4fc;
       --text: #e2e8f0;
@@ -33,7 +33,7 @@
       -webkit-overflow-scrolling: touch;
       transition: background 0.3s ease;
     }
-    /* 深色模式下的背景 */
+    /* Dark mode background */
     :root[data-theme="dark"] body {
       background: linear-gradient(-45deg, #1e1b4b, #2e1065, #312e81, #3730a3);
     }
@@ -337,18 +337,18 @@
     }
   </style>
   <script>
-    // 检测当前时间并设置主题
+    // Check current time and set theme
     function setThemeByTime() {
       const hour = new Date().getHours();
-      const isDarkTime = hour < 6 || hour >= 18; // 晚上6点到早上6点使用深色模式
+      const isDarkTime = hour < 6 || hour >= 18; // Dark mode from 6PM to 6AM
       document.documentElement.setAttribute('data-theme', isDarkTime ? 'dark' : 'light');
     }
 
     window.onload = function() {
-      // 初始设置主题
+      // Initial theme setting
       setThemeByTime();
       
-      // 每分钟检查一次时间以更新主题
+      // Check time every minute to update theme
       setInterval(setThemeByTime, 60000);
 
       const mainContent = document.getElementById('mainContent');
@@ -359,9 +359,9 @@
       promptContent.className = 'interaction-prompt-content';
       
       if ('ontouchstart' in window) {
-        promptContent.innerHTML = '👆 请滚动页面以继续...<br><small style="opacity:0.8">轻轻滑动即可验证</small>';
+        promptContent.innerHTML = '👆 Please scroll to continue...<br><small style="opacity:0.8">Gently scroll to verify</small>';
       } else {
-        promptContent.innerHTML = '🖱️ 请移动鼠标以继续...<br><small style="opacity:0.8">轻轻移动即可验证</small>';
+        promptContent.innerHTML = '🖱️ Please move your mouse to continue...<br><small style="opacity:0.8">Gently move to verify</small>';
       }
       
       prompt.appendChild(promptContent);
@@ -383,10 +383,10 @@
             document.getElementById("domainName").textContent = window.location.hostname;
             const bubble = document.createElement('div');
             bubble.className = 'bubble-tip';
-            bubble.innerHTML = '欢迎访问！祝您使用愉快 ✨';
+            bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
             document.querySelector('.captcha-box').appendChild(bubble);
 
-            // 添加版权信息
+            // Add copyright info
             const copyright = document.createElement('a');
             copyright.className = 'copyright';
             copyright.href = 'https://t.me/EchoAether';
@@ -419,21 +419,21 @@
   <div id="mainContent">
     <div class="main-container">
       <div class="content-wrapper">
-        <h1 class="title">安全验证</h1>
+        <h1 class="title">Security Verification</h1>
         <div class="subtitle">
-          <p>请完成以下验证以继续访问 <span id="domainName"></span></p>
+          <p>Please complete the verification to continue to <span id="domainName"></span></p>
         </div>
         <div class="captcha-box">
           ::CAPTCHA_BOX::
         </div>
         <div class="info-box">
-          <p class="highlight">为什么需要验证？</p>
-          <p>为了确保网站安全并提供最佳的访问体验，我们需要验证您的访问请求。这个过程只需要几秒钟。</p>
+          <p class="highlight">Why do I need to verify?</p>
+          <p>To ensure website security and provide the best browsing experience, we need to verify your access request. This process only takes a few seconds.</p>
         </div>
         <footer class="footer">
           <div class="footer-list">
-            <span>事件ID: ::RAY_ID::</span>
-            <span>您的IP: ::CLIENT_IP::</span>
+            <span>Event ID: ::RAY_ID::</span>
+            <span>Your IP: ::CLIENT_IP::</span>
           </div>
         </footer>
       </div>
