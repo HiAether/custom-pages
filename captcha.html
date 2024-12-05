@@ -17,16 +17,16 @@
       background: linear-gradient(-45deg, #f8f9fa, #e2e8f0, #cbd5e1, #94a3b8);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      min-height: 100vh; /* Changed back to min-height */
+      min-height: 100vh;
       margin: 0;
       padding: 0;
       position: relative;
-      overflow-y: auto; /* Allow vertical scrolling */
+      overflow-y: auto;
       -webkit-tap-highlight-color: transparent;
     }
     body::before {
       content: '';
-      position: fixed; /* Changed to fixed */
+      position: fixed;
       width: 200%;
       height: 200%;
       top: -50%;
@@ -37,14 +37,13 @@
     }
     .main-container {
       display: flex;
-      min-height: 100vh; /* Changed back to min-height */
+      min-height: 100vh;
       padding: clamp(0.5rem, 5vw, 2rem);
       align-items: center;
       backdrop-filter: blur(10px);
       position: relative;
       overflow-y: auto;
     }
-    /* Rest of the styles remain unchanged */
     .content-wrapper {
       width: 100%;
       max-width: min(90vw, 700px);
