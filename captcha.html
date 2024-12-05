@@ -17,11 +17,11 @@
       background: linear-gradient(-45deg, #f8f9fa, #e2e8f0, #cbd5e1, #94a3b8);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      min-height: 100vh;
+      height: 100vh; /* Changed from min-height to height */
       margin: 0;
       padding: 0;
       position: relative;
-      overflow: hidden;
+      overflow: hidden; /* This prevents scrolling */
       -webkit-tap-highlight-color: transparent;
     }
     body::before {
@@ -37,11 +37,12 @@
     }
     .main-container {
       display: flex;
-      min-height: 100vh;
+      height: 100vh; /* Changed from min-height to height */
       padding: clamp(0.5rem, 5vw, 2rem);
       align-items: center;
       backdrop-filter: blur(10px);
       position: relative;
+      overflow-y: auto; /* Allow scrolling within container if needed */
     }
     .content-wrapper {
       width: 100%;
