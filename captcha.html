@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>安全质询 | Cloud Service</title>
+  <title>Security Challenge | layer7.wiki</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
@@ -198,6 +198,19 @@
       transform: translateY(-2px) scale(1.02);
       box-shadow: 0 6px 15px rgba(139,92,246,0.15);
     }
+    .copyright {
+      font-size: 0.8rem;
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .copyright a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .copyright a:hover {
+      color: var(--primary);
+    }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -242,7 +255,7 @@
       document.getElementById("domainName").textContent = window.location.hostname;
       const bubble = document.createElement('div');
       bubble.className = 'bubble-tip';
-      bubble.innerHTML = '欢迎访问！祝您使用愉快 ✨';
+      bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
       document.querySelector('.captcha-box').appendChild(bubble);
 
       const contentWrapper = document.querySelector('.content-wrapper');
@@ -250,9 +263,9 @@
       prompt.className = 'interaction-prompt';
       
       if ('ontouchstart' in window) {
-        prompt.textContent = '请滚动屏幕继续...';
+        prompt.textContent = 'Please scroll to continue...';
       } else {
-        prompt.textContent = '请移动鼠标继续...';
+        prompt.textContent = 'Please move your mouse to continue...';
       }
       document.body.appendChild(prompt);
 
@@ -268,7 +281,7 @@
             bubble.classList.add('show');
           }, 500);
           
-          // 移除所有事件监听器
+          // Remove all event listeners
           document.removeEventListener('mousemove', showContent);
           document.removeEventListener('touchmove', showContent);
           document.removeEventListener('scroll', showContent);
@@ -287,21 +300,24 @@
 <body>
   <div class="main-container">
     <div class="content-wrapper">
-      <h1 class="title">安全验证</h1>
+      <h1 class="title">Security Verification</h1>
       <div class="subtitle">
-        <p>请完成以下验证以继续访问 <span id="domainName"></span></p>
+        <p>Please complete the verification to continue to <span id="domainName"></span></p>
       </div>
       <div class="captcha-box">
         ::CAPTCHA_BOX::
       </div>
       <div class="info-box">
-        <p class="highlight">为什么需要验证？</p>
-        <p>为了确保网站安全并提供最佳的访问体验，我们需要验证您的访问请求。这个过程只需要几秒钟。</p>
+        <p class="highlight">Why is verification needed?</p>
+        <p>To ensure website security and provide the best browsing experience, we need to verify your access request. This process only takes a few seconds.</p>
       </div>
       <footer class="footer">
         <div class="footer-list">
-          <span>事件ID: ::RAY_ID::</span>
-          <span>您的IP: ::CLIENT_IP::</span>
+          <span>Event ID: ::RAY_ID::</span>
+          <span>Your IP: ::CLIENT_IP::</span>
+        </div>
+        <div class="copyright">
+          <a href="https://t.me/EchoAether" target="_blank">© 2024 By aether</a>
         </div>
       </footer>
     </div>
