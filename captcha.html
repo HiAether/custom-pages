@@ -1,17 +1,15 @@
 <html lang="en">
 <head>
-  <title>Security Challenge | layer7.wiki</title>
+  <title>安全质询 | Cloud Service</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
-    /* Original styles */
     :root {
       --primary: #8b5cf6;
       --text: #1f2937;
       --gradient1: #7c3aed;
       --gradient2: #a78bfa;
     }
-    /* All original styles remain the same */
     body {
       font-family: system-ui, -apple-system, sans-serif;
       color: var(--text);
@@ -23,31 +21,216 @@
       margin: 0;
       padding: 0;
       position: relative;
-      overflow-y: auto;
-      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
     }
-    /* Keep all original styles... */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(139,92,246,0) 70%);
+      animation: rotate 30s linear infinite;
+    }
     .interaction-prompt {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg,#fff,#f3e8ff);
-      padding: clamp(16px, 3vw, 24px);
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(139,92,246,0.15);
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      background: linear-gradient(135deg, var(--gradient1), var(--gradient2));
+      padding: clamp(20px, 4vw, 32px);
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(139,92,246,0.2);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       font-weight: 500;
       text-align: center;
+      color: white;
       z-index: 1000;
+      max-width: 90%;
+      width: auto;
+      animation: float 3s ease-in-out infinite;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.2);
+      transition: all 0.5s ease;
+    }
+    .interaction-prompt::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      background: linear-gradient(45deg, var(--gradient1), var(--gradient2));
+      border-radius: 26px;
+      z-index: -1;
+      filter: blur(8px);
+      opacity: 0.5;
     }
     #mainContent {
       display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
     }
     #mainContent.show {
       display: block;
+      opacity: 1;
     }
-    /* Keep all other original styles... */
+    .main-container {
+      display: flex;
+      min-height: 100vh;
+      padding: 2rem;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+    .content-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem;
+      animation: fadeIn 1s ease;
+      position: relative;
+    }
+    .title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 40%, #8b5cf6 80%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.75rem;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+    .subtitle {
+      font-size: 1.6rem;
+      color: #4b5563;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      font-weight: 300;
+    }
+    .captcha-box {
+      background: rgba(255,255,255,0.95);
+      border-radius: 28px;
+      padding: 3rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 15px 35px rgba(139,92,246,0.15);
+      border: 1px solid rgba(255,255,255,0.8);
+      position: relative;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+    }
+    .captcha-box:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(139,92,246,0.2);
+    }
+    .bubble-tip {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: linear-gradient(135deg,#fff,#f3e8ff);
+      padding: 14px 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(139,92,246,0.15);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      animation: float 3s ease-in-out infinite;
+    }
+    .bubble-tip:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 10px 25px rgba(139,92,246,0.2);
+    }
+    .info-box {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(139,92,246,0.1);
+      border: 1px solid rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .info-box:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 35px rgba(139,92,246,0.15);
+    }
+    .highlight {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 1rem 0;
+      display: inline-block;
+      position: relative;
+    }
+    .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg,var(--gradient1),var(--gradient2));
+      opacity: 0.6;
+      animation: shimmer 2s infinite;
+    }
+    .footer {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 3rem;
+      border-top: 2px solid rgba(139,92,246,0.2);
+    }
+    .footer-list {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .footer-list span {
+      padding: 0.75rem 1.5rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 4px 12px rgba(139,92,246,0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .footer-list span:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 15px rgba(139,92,246,0.15);
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px) }
+      to { opacity:1; transform:translateY(0) }
+    }
+    @keyframes float {
+      0% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-50%, -60%); }
+      100% { transform: translate(-50%, -50%); }
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes titleGlow {
+      0% { text-shadow: 0 0 10px rgba(139,92,246,0.5); }
+      50% { text-shadow: 0 0 20px rgba(139,92,246,0.8); }
+      100% { text-shadow: 0 0 10px rgba(139,92,246,0.5); }
+    }
+    @media (max-width: 768px) {
+      .title { font-size:2.25rem }
+      .subtitle { font-size:1.3rem; padding:0 1rem }
+      .footer-list { flex-direction:column; gap:1rem }
+      .captcha-box { padding:2rem; margin:2rem 0 }
+    }
   </style>
   <script>
     window.onload = function() {
@@ -56,9 +239,9 @@
       prompt.className = 'interaction-prompt';
       
       if ('ontouchstart' in window) {
-        prompt.textContent = 'Please scroll to continue...';
+        prompt.innerHTML = '👆 请滚动页面以继续...<br><small style="opacity:0.8">轻轻滑动即可验证</small>';
       } else {
-        prompt.textContent = 'Please move your mouse to continue...';
+        prompt.innerHTML = '🖱️ 请移动鼠标以继续...<br><small style="opacity:0.8">轻轻移动即可验证</small>';
       }
       document.body.appendChild(prompt);
 
@@ -67,22 +250,22 @@
       function showContent() {
         if (!interactionDetected) {
           interactionDetected = true;
-          prompt.remove();
-          mainContent.style.display = 'block';
-          
-          // Initialize main content
-          document.getElementById("domainName").textContent = window.location.hostname;
-          const bubble = document.createElement('div');
-          bubble.className = 'bubble-tip';
-          bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
-          document.querySelector('.captcha-box').appendChild(bubble);
+          prompt.style.transform = 'translate(-50%, -50%) scale(0.9)';
+          prompt.style.opacity = '0';
           setTimeout(() => {
-            bubble.classList.add('show');
+            prompt.remove();
+            mainContent.style.display = 'block';
+            requestAnimationFrame(() => {
+              mainContent.classList.add('show');
+            });
+            
+            document.getElementById("domainName").textContent = window.location.hostname;
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble-tip';
+            bubble.innerHTML = '欢迎访问！祝您使用愉快 ✨';
+            document.querySelector('.captcha-box').appendChild(bubble);
           }, 500);
           
-          document.querySelector('.content-wrapper').classList.add('active');
-          
-          // Remove event listeners
           document.removeEventListener('mousemove', showContent);
           document.removeEventListener('touchmove', showContent);
           document.removeEventListener('scroll', showContent);
@@ -102,24 +285,21 @@
   <div id="mainContent">
     <div class="main-container">
       <div class="content-wrapper">
-        <h1 class="title">Security Verification</h1>
+        <h1 class="title">安全验证</h1>
         <div class="subtitle">
-          <p>Please complete the verification to continue to <span id="domainName"></span></p>
+          <p>请完成以下验证以继续访问 <span id="domainName"></span></p>
         </div>
         <div class="captcha-box">
           ::CAPTCHA_BOX::
         </div>
         <div class="info-box">
-          <p class="highlight">Why is verification needed?</p>
-          <p>To ensure website security and provide the best browsing experience, we need to verify your access request. This process only takes a few seconds.</p>
+          <p class="highlight">为什么需要验证？</p>
+          <p>为了确保网站安全并提供最佳的访问体验，我们需要验证您的访问请求。这个过程只需要几秒钟。</p>
         </div>
         <footer class="footer">
           <div class="footer-list">
-            <span>Event ID: ::RAY_ID::</span>
-            <span>Your IP: ::CLIENT_IP::</span>
-          </div>
-          <div class="copyright">
-            <a href="https://t.me/EchoAether" target="_blank">© 2024 By aether</a>
+            <span>事件ID: ::RAY_ID::</span>
+            <span>您的IP: ::CLIENT_IP::</span>
           </div>
         </footer>
       </div>
