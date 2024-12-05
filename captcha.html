@@ -21,7 +21,7 @@
       margin: 0;
       padding: 0;
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
       -webkit-tap-highlight-color: transparent;
     }
     body::before {
@@ -50,6 +50,35 @@
       padding: clamp(1.5rem, 3vw, 3rem);
       animation: fadeIn 1s ease;
       position: relative;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+    }
+    .content-wrapper.active {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: all;
+    }
+    .interaction-prompt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg,#fff,#f3e8ff);
+      padding: clamp(16px, 3vw, 24px);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(139,92,246,0.15);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 500;
+      text-align: center;
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    .interaction-prompt.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
     .title {
       font-size: clamp(2rem, 5vw, 3.2rem);
@@ -97,6 +126,12 @@
       font-weight: 500;
       transition: all 0.3s ease;
       animation: float 3s ease-in-out infinite;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .bubble-tip.show {
+      opacity: 1;
+      visibility: visible;
     }
     .bubble-tip:hover {
       transform: scale(1.05) rotate(2deg);
@@ -207,6 +242,43 @@
       bubble.className = 'bubble-tip';
       bubble.innerHTML = '欢迎访问！祝您使用愉快 ✨';
       document.querySelector('.captcha-box').appendChild(bubble);
+
+      const contentWrapper = document.querySelector('.content-wrapper');
+      const prompt = document.createElement('div');
+      prompt.className = 'interaction-prompt';
+      
+      if ('ontouchstart' in window) {
+        prompt.textContent = '请滚动屏幕继续...';
+      } else {
+        prompt.textContent = '请移动鼠标继续...';
+      }
+      document.body.appendChild(prompt);
+
+      let interactionDetected = false;
+
+      function showContent() {
+        if (!interactionDetected) {
+          interactionDetected = true;
+          contentWrapper.classList.add('active');
+          prompt.classList.add('hidden');
+          setTimeout(() => {
+            prompt.remove();
+            bubble.classList.add('show');
+          }, 500);
+          
+          // 移除所有事件监听器
+          document.removeEventListener('mousemove', showContent);
+          document.removeEventListener('touchmove', showContent);
+          document.removeEventListener('scroll', showContent);
+        }
+      }
+
+      if ('ontouchstart' in window) {
+        document.addEventListener('touchmove', showContent, {once: true, passive: true});
+        document.addEventListener('scroll', showContent, {once: true, passive: true});
+      } else {
+        document.addEventListener('mousemove', showContent, {once: true});
+      }
     };
   </script>
 </head>
