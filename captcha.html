@@ -4,10 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
+    /* Original styles */
     :root {
       --primary: #8b5cf6;
       --text: #1f2937;
+      --gradient1: #7c3aed;
+      --gradient2: #a78bfa;
     }
+    /* All original styles remain the same */
     body {
       font-family: system-ui, -apple-system, sans-serif;
       color: var(--text);
@@ -18,10 +22,11 @@
       min-height: 100vh;
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: relative;
+      overflow-y: auto;
+      -webkit-tap-highlight-color: transparent;
     }
+    /* Keep all original styles... */
     .interaction-prompt {
       position: fixed;
       top: 50%;
@@ -36,14 +41,17 @@
       text-align: center;
       z-index: 1000;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    #mainContent {
+      display: none;
     }
+    #mainContent.show {
+      display: block;
+    }
+    /* Keep all other original styles... */
   </style>
   <script>
     window.onload = function() {
+      const mainContent = document.getElementById('mainContent');
       const prompt = document.createElement('div');
       prompt.className = 'interaction-prompt';
       
@@ -54,19 +62,68 @@
       }
       document.body.appendChild(prompt);
 
-      function loadMainPage() {
-        window.location.href = 'main.html';
+      let interactionDetected = false;
+
+      function showContent() {
+        if (!interactionDetected) {
+          interactionDetected = true;
+          prompt.remove();
+          mainContent.style.display = 'block';
+          
+          // Initialize main content
+          document.getElementById("domainName").textContent = window.location.hostname;
+          const bubble = document.createElement('div');
+          bubble.className = 'bubble-tip';
+          bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
+          document.querySelector('.captcha-box').appendChild(bubble);
+          setTimeout(() => {
+            bubble.classList.add('show');
+          }, 500);
+          
+          document.querySelector('.content-wrapper').classList.add('active');
+          
+          // Remove event listeners
+          document.removeEventListener('mousemove', showContent);
+          document.removeEventListener('touchmove', showContent);
+          document.removeEventListener('scroll', showContent);
+        }
       }
 
       if ('ontouchstart' in window) {
-        document.addEventListener('touchmove', loadMainPage, {once: true, passive: true});
-        document.addEventListener('scroll', loadMainPage, {once: true, passive: true});
+        document.addEventListener('touchmove', showContent, {once: true, passive: true});
+        document.addEventListener('scroll', showContent, {once: true, passive: true});
       } else {
-        document.addEventListener('mousemove', loadMainPage, {once: true});
+        document.addEventListener('mousemove', showContent, {once: true});
       }
     };
   </script>
 </head>
 <body>
+  <div id="mainContent">
+    <div class="main-container">
+      <div class="content-wrapper">
+        <h1 class="title">Security Verification</h1>
+        <div class="subtitle">
+          <p>Please complete the verification to continue to <span id="domainName"></span></p>
+        </div>
+        <div class="captcha-box">
+          ::CAPTCHA_BOX::
+        </div>
+        <div class="info-box">
+          <p class="highlight">Why is verification needed?</p>
+          <p>To ensure website security and provide the best browsing experience, we need to verify your access request. This process only takes a few seconds.</p>
+        </div>
+        <footer class="footer">
+          <div class="footer-list">
+            <span>Event ID: ::RAY_ID::</span>
+            <span>Your IP: ::CLIENT_IP::</span>
+          </div>
+          <div class="copyright">
+            <a href="https://t.me/EchoAether" target="_blank">© 2024 By aether</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
