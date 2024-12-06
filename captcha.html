@@ -10,7 +10,6 @@
       --gradient1: #6366f1;
       --gradient2: #a5b4fc;
     }
-    /* Add dark mode variables */
     :root[data-theme="dark"] {
       --primary: #a5b4fc;
       --text: #e2e8f0;
@@ -33,7 +32,6 @@
       -webkit-overflow-scrolling: touch;
       transition: background 0.3s ease;
     }
-    /* Dark mode background */
     :root[data-theme="dark"] body {
       background: linear-gradient(-45deg, #1e1b4b, #2e1065, #312e81, #3730a3);
     }
@@ -337,7 +335,6 @@
     }
   </style>
   <script>
-    // Check current time and set theme
     function setThemeByTime() {
       const hour = new Date().getHours();
       const isDarkTime = hour < 6 || hour >= 18; // Dark mode from 6PM to 6AM
@@ -348,7 +345,6 @@
       // Initial theme setting
       setThemeByTime();
       
-      // Check time every minute to update theme
       setInterval(setThemeByTime, 60000);
 
       const mainContent = document.getElementById('mainContent');
@@ -386,7 +382,6 @@
             bubble.innerHTML = 'Welcome! Enjoy your visit ✨';
             document.querySelector('.captcha-box').appendChild(bubble);
 
-            // Add copyright info
             const copyright = document.createElement('a');
             copyright.className = 'copyright';
             copyright.href = 'https://t.me/EchoAether';
