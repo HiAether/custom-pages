@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>访问被阻止</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+SC:wght@400;700&display=swap');
-
         :root {
             --primary-color: #2c3e50;
             --accent-color: #3498db;
@@ -26,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Share Tech Mono', 'Noto Sans SC', monospace;
+            font-family: monospace;
             color: var(--text-color);
             overflow: hidden;
             position: relative;
@@ -47,7 +45,54 @@
             opacity: 0.3;
         }
 
-        /* 浮动粒子效果 */
+        /* 浮动文字效果 */
+        .floating-text {
+            position: fixed;
+            color: var(--accent-color);
+            opacity: 0.2;
+            white-space: nowrap;
+            pointer-events: none;
+            font-size: 24px;
+            text-shadow: 0 0 5px var(--accent-color);
+        }
+
+        .text-left-right {
+            animation: moveLeftRight 15s linear infinite;
+        }
+
+        .text-right-left {
+            animation: moveRightLeft 20s linear infinite;
+        }
+
+        .text-top-bottom {
+            animation: moveTopBottom 18s linear infinite;
+        }
+
+        .text-diagonal {
+            animation: moveDiagonal 25s linear infinite;
+        }
+
+        @keyframes moveLeftRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100vw); }
+        }
+
+        @keyframes moveRightLeft {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-100%); }
+        }
+
+        @keyframes moveTopBottom {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100vh); }
+        }
+
+        @keyframes moveDiagonal {
+            0% { transform: translate(-100%, -100%); }
+            100% { transform: translate(100vw, 100vh); }
+        }
+
+        /* 原有的样式保持不变 */
         .particles {
             position: fixed;
             top: 0;
@@ -217,6 +262,10 @@
 <body>
     <div class="background-grid"></div>
     <div class="particles"></div>
+    <div class="floating-text text-left-right" style="top: 15%;">大傻逼回去练练再来打你爹草泥马</div>
+    <div class="floating-text text-right-left" style="top: 35%;">大傻逼回去练练再来打你爹草泥马</div>
+    <div class="floating-text text-top-bottom" style="left: 25%;">大傻逼回去练练再来打你爹草泥马</div>
+    <div class="floating-text text-diagonal" style="top: 65%;">大傻逼回去练练再来打你爹草泥马</div>
     <div class="container">
         <div class="glitch-effect"></div>
         <h1>装黑客来打你爹？</h1>
@@ -238,7 +287,27 @@
                 particlesContainer.appendChild(particle);
             }
         }
+        
+        // 创建更多浮动文字
+        function createFloatingTexts() {
+            const positions = [
+                { top: '85%', left: '10%', className: 'text-left-right' },
+                { top: '5%', left: '60%', className: 'text-right-left' },
+                { top: '45%', left: '75%', className: 'text-diagonal' }
+            ];
+            
+            positions.forEach(pos => {
+                const text = document.createElement('div');
+                text.className = `floating-text ${pos.className}`;
+                text.style.top = pos.top;
+                text.style.left = pos.left;
+                text.textContent = '大傻逼回去练练再来打你爹草泥马';
+                document.body.appendChild(text);
+            });
+        }
+
         createParticles();
+        createFloatingTexts();
     </script>
 </body>
 </html>
