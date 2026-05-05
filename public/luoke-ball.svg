@@ -1,0 +1,54 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldBase" x1="175" y1="168" x2="468" y2="330" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE58A"/>
+      <stop offset="0.55" stop-color="#FFBF37"/>
+      <stop offset="1" stop-color="#F08D1A"/>
+    </linearGradient>
+    <linearGradient id="bottom" x1="236" y1="358" x2="429" y2="518" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDF7FF"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="270" y1="251" x2="372" y2="390" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8ED3FF"/>
+      <stop offset="1" stop-color="#2F78FF"/>
+    </linearGradient>
+    <linearGradient id="gem" x1="295" y1="285" x2="346" y2="344" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF0"/>
+      <stop offset="1" stop-color="#FFF0A8"/>
+    </linearGradient>
+    <filter id="shadow" x="85" y="93" width="470" height="460" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#87AEDA" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <circle cx="320" cy="320" r="250" fill="#FFFDF5"/>
+  <g filter="url(#shadow)">
+    <circle cx="320" cy="320" r="176" fill="url(#bottom)"/>
+    <path d="M144 320C144 223 223 144 320 144C417 144 496 223 496 320H144Z" fill="url(#goldBase)"/>
+    <path d="M192 213C223 189 263 176 320 176C377 176 417 189 448 213" stroke="#FFF1B7" stroke-width="20" stroke-linecap="round"/>
+    <path d="M163 323H477" stroke="#24416A" stroke-width="18" stroke-linecap="round"/>
+
+    <g>
+      <circle cx="320" cy="320" r="56" fill="#1F4674"/>
+      <circle cx="320" cy="320" r="44" fill="url(#ring)"/>
+      <circle cx="320" cy="320" r="26" fill="url(#gem)"/>
+      <path d="M320 293L326.7 309.5L344.5 311L331 322.3L335.4 339.5L320 330L304.6 339.5L309 322.3L295.5 311L313.3 309.5L320 293Z" fill="#FFF3AE"/>
+    </g>
+
+    <path d="M256 140L286 170" stroke="#7CC6FF" stroke-width="16" stroke-linecap="round"/>
+    <path d="M384 140L354 170" stroke="#7CC6FF" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="251" cy="135" r="18" fill="#84CCFF"/>
+    <circle cx="389" cy="135" r="18" fill="#84CCFF"/>
+
+    <path d="M214 214L236 226L264 214" stroke="#FFF7D9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M376 214L404 226L426 214" stroke="#FFF7D9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <circle cx="320" cy="320" r="154" stroke="#F3C84A" stroke-width="7" opacity="0.8"/>
+    <path d="M214 394C240 434 277 460 320 470C363 460 400 434 426 394" stroke="#B4DFFF" stroke-width="12" stroke-linecap="round"/>
+
+    <ellipse cx="246" cy="238" rx="42" ry="18" fill="#FFF8CC" opacity="0.75"/>
+    <ellipse cx="404" cy="210" rx="34" ry="14" fill="#FFF6BE" opacity="0.7"/>
+    <ellipse cx="291" cy="384" rx="28" ry="18" fill="#D6EDFF" opacity="0.85"/>
+  </g>
+</svg>
